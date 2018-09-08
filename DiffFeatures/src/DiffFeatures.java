@@ -1,6 +1,7 @@
 import spoon.support.compiler.VirtualFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
@@ -8,12 +9,6 @@ import java.util.concurrent.Executors;
 
 public class DiffFeatures {
     public static void main(String args[]) {
-        try {
-            DiffFeatures df = new DiffFeatures();
-            df.setInput(new File("D:\\test"), new File("D:\\test"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     private int parallel;
@@ -49,8 +44,17 @@ public class DiffFeatures {
     }
 
     public void setInput(String code1 , String code2) throws Exception{
-        originalFileList.add(File.createTempFile(String.valueOf(code1.hashCode()),".java"));
-        changedFileList.add(File.createTempFile(String.valueOf(code2.hashCode()),".java"));
+        File file=File.createTempFile(String.valueOf(code1.hashCode()),".java");
+        originalFileList.add(file);
+        FileOutputStream outputStream=new FileOutputStream(file);
+        outputStream.write(code1.getBytes());
+        outputStream.close();
+
+        file=File.createTempFile(String.valueOf(code2.hashCode()),".java");
+        changedFileList.add(file);
+        outputStream=new FileOutputStream(file);
+        outputStream.write(code2.getBytes());
+        outputStream.close();
     }
 
     public void build() throws Exception{
@@ -59,7 +63,8 @@ public class DiffFeatures {
         ExecutorCompletionService<ArrayList<Object[]>> service=new ExecutorCompletionService<>(threadPool);
 
         for(int i=0;i<originalFileList.size();i++)
-            service.submit(new OneFile(originalFileList.get(i) , changedFileList.get(i)));
+            service.submit(new OneFile(originalFileList.get(i), changedFileList.get(i)));
+
 
         for(int i=0;i<originalFileList.size();i++)
             result.addAll(service.take().get());

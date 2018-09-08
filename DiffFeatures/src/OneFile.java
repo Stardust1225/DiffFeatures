@@ -33,6 +33,7 @@ public class OneFile implements Callable<ArrayList<Object[]>> {
 
         CtModel model1 = getModel(file1, content1);
         ArrayList<CtMethod> list1 = new ArrayList<>(model1.getElements(new TypeFilter<>(CtMethod.class)));
+
         HashMap<String, CtMethod> methodMap1 = new HashMap<>();
         HashMap<CtMethod, Integer> positionMap = new HashMap<>();
         int position = 0;

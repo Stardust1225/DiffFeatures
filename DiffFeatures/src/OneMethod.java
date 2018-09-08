@@ -238,14 +238,14 @@ public class OneMethod {
         });
 
         int startLine = ctMethod.getBody().getPosition().getLine(), endLine = ctMethod.getBody().getPosition().getEndLine();
-        result[6] += (endLine - startLine) * kind;
+        result[6] += (endLine - startLine + 1) * kind;
         double max = 0, average = 0;
-        for (int i = startLine; i <= endLine; i++) {
+        for (int i = startLine-1; i <=endLine-1; i++) {
             if (max < filecontent.get(i).length())
                 max = filecontent.get(i).length();
             average += filecontent.get(i).length();
         }
-        average = average / (endLine - startLine);
+        average = average / (endLine - startLine + 1);
         result[7] += max * kind;
         result[8] += average * kind;
 

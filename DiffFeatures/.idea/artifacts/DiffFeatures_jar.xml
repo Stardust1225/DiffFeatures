@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DiffFeatures:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DiffFeatures_jar</output-path>
+    <root id="archive" name="DiffFeatures.jar">
+      <element id="module-output" name="DiffFeatures" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/spoon-core-7.0.0-jar-with-dependencies.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
