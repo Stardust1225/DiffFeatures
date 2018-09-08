@@ -21,6 +21,19 @@
 
 #### 3.1 Quick Start
 &emsp; You can use it in Java. For example, you can input two Java code and get the values.
+```
+DiffFeatures diffFeatures = new DiffFeatures();
+String code1 = "class A{ void f(){ int a=1; } }";
+String code2 = "class A{ void f(){ int a=2; } }";
+try {
+    diffFeatures.setInput(code1, code2);
+    diffFeatures.build();
+    ArrayList<Object[]> result=diffFeatures.getResult();
+    double[] values=(double[])result.get(0)[2];
+}catch (Exception e){
+    e.printStackTrace();
+}
+```        
 
 #### 3.2 Multiple Input
 
