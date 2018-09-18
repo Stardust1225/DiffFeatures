@@ -58,6 +58,7 @@ public class OneFile implements Callable<ArrayList<Object[]>> {
                             new Object[]{
                                     file1.getAbsolutePath(),
                                     file2.getAbsolutePath(),
+                                    sign,
                                     record
                             });
                 }
